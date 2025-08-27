@@ -1,0 +1,54 @@
+{
+  "name": "wasmforge",
+  "version": "1.0.0",
+  "description": "WasmForge is a toolkit designed to dramatically simplify the WebAssembly (Wasm) development workflow, bringing a new level of type safety, developer experience, and ease of integration to your Wasm projects. Say goodbye to manual bindings and arcane memory management; with WasmForge, loading and interacting with Wasm feels just like using regular JavaScript modules.",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "jest",
+    "lint": "eslint \"{src,test}/**/*.ts\"",
+    "lint:fix": "eslint \"{src,test}/**/*.ts\" --fix",
+    "format": "prettier --write \"{src,test}/**/*.ts\"",
+    "dev": "npm run build && node dist/cli/index.js",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deondreE/WasmForge.git"
+  },
+  "keywords": [
+    "webassembly",
+    "wasm",
+    "typescript",
+    "bindings",
+    "cli",
+    "workflow"
+  ],
+  "author": "deondreE",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/deondreE/WasmForge/issues"
+  },
+  "files": [
+    "dist",
+    "package.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "homepage": "https://github.com/deondreE/WasmForge#readme",
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.3.0",
+    "@typescript-eslint/eslint-plugin": "^8.41.0",
+    "@typescript-eslint/parser": "^8.41.0",
+    "commander": "^14.0.0",
+    "eslint": "^9.34.0",
+    "eslint-config-prettier": "^10.1.8",
+    "jest": "^30.1.1",
+    "prettier": "^3.6.2",
+    "ts-jest": "^29.4.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
+  }
+}

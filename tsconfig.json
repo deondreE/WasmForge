@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "es2020",
+    "module": "commonjs", // Or "esnext" if you're targeting ESM exclusively
+    "lib": ["es2020", "dom"], // `dom` needed for browser APIs in runtime (e.g., TextEncoder)
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true, // Generate .d.ts files for your library
+    "sourceMap": true,
+    "composite": true // If you eventually split into multiple packages (e.g., @wasmforge/cli, @wasmforge/runtime)
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist", "test"]
+}
