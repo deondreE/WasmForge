@@ -16,4 +16,6 @@ export interface WasmModuleInfo {
     funcTypeIndices: number[];
     exports: ExportedFunction[];
     hasMemory: boolean;
+    hasAlloc?: boolean;
+    hasFree?: boolean;
 }

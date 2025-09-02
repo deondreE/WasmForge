@@ -6,6 +6,13 @@ declare module "./wasm_demo.wasm" {
     greet(arg0: number, arg1: number): void;
     __malloc(arg0: number): number;
     __free(arg0: number, arg1: number): void;
+    negate_i64(arg0: bigint): bigint;
+    half_f32(arg0: number): number;
+    hypotenuse(arg0: number, arg1: number): number;
+    log_number(arg0: number): void;
+    mix(arg0: number, arg1: number, arg2: number): number;
+    get_magic_number(): number;
+    increment_counter(): void;
     memory: WebAssembly.Memory;
   }
   const init: (imports?: WebAssembly.Imports) => Promise<Exports>;

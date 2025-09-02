@@ -16,7 +16,6 @@ enum ExportKind {
     Global = 3,
 }
 
-// --- Helpers ---
 function readU32LEB(buf: Uint8Array, offset: { pos: number }): number {
     let result = 0,
         shift = 0;
@@ -55,7 +54,6 @@ function mapValType(byte: number): WasmValueType {
     }
 }
 
-// --- Parser ---
 export function parseWasm(filePath: string): WasmModuleInfo {
     const buf = new Uint8Array(readFileSync(filePath));
     const offset = { pos: 0 };
@@ -124,6 +122,8 @@ export function parseWasm(filePath: string): WasmModuleInfo {
                     const index = readU32LEB(buf, offset);
                     if (kind === ExportKind.Func) {
                         exports.push({ name, index });
+                        if (name === 'alloc') hasAlloc = true;
+                        if (name === 'free') hasFree = true;
                     } else if (kind === ExportKind.Mem) {
                         hasMemory = true;
                     }

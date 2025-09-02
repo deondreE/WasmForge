@@ -13,25 +13,25 @@ WasmForge aims to cover the entire Wasm lifecycle, from compilation hints to sea
 ## Core Developer Experience
 
 - ⚡️ Type-Safe Wasm Bindings (Auto-Generated):
-  - Automatically generates TypeScript declaration files (.d.ts) and JavaScript/TypeScript wrapper modules for your Wasm binaries.
-  - Provides full IDE auto-completion, parameter hints, and compile-time type checking for your Wasm module's exports.
-  - No more instance.exports.myFunc as any or guesswork!
+    - Automatically generates TypeScript declaration files (.d.ts) and JavaScript/TypeScript wrapper modules for your Wasm binaries.
+    - Provides full IDE auto-completion, parameter hints, and compile-time type checking for your Wasm module's exports.
+    - No more instance.exports.myFunc as any or guesswork!
 - 🔌 Effortless Module Loading:
-  - Abstracts away WebAssembly.instantiateStreaming and WebAssembly.instantiate complexities.
-  - Handles default import object creation and robust error handling during instantiation.
+    - Abstracts away WebAssembly.instantiateStreaming and WebAssembly.instantiate complexities.
+    - Handles default import object creation and robust error handling during instantiation.
 - ↔️ Seamless Data Marshalling:
-  - Built-in, type-safe helpers for easily passing strings and common data types (numbers, booleans, Typed Arrays) between JavaScript and Wasm memory.
-  - Eliminates the need for manual pointer arithmetic or TextEncoder/TextDecoder boilerplate.
+    - Built-in, type-safe helpers for easily passing strings and common data types (numbers, booleans, Typed Arrays) between JavaScript and Wasm memory.
+    - Eliminates the need for manual pointer arithmetic or TextEncoder/TextDecoder boilerplate.
 
 ## Build & Optimization
 
 - 🚀 Wasm Binary Optimization Integration:
-  - Provides a simple interface to integrate powerful optimization tools like wasm-opt (Binaryen) into your build pipeline.
-  - Automate dead code elimination, aggressive size reduction, and performance enhancements.
+    - Provides a simple interface to integrate powerful optimization tools like wasm-opt (Binaryen) into your build pipeline.
+    - Automate dead code elimination, aggressive size reduction, and performance enhancements.
 - 🎯 Unified Build Tooling (Future):
-  - A consistent CLI/API to orchestrate various Wasm compilers (Rust, C/C++, AssemblyScript) with simplified, language-agnostic configurations.
+    - A consistent CLI/API to orchestrate various Wasm compilers (Rust, C/C++, AssemblyScript) with simplified, language-agnostic configurations.
 - 📦 Bundler Integration (Upcoming):
-  - First-party plugins for popular bundlers (Webpack, Rollup, Vite) to automate Wasm compilation, optimization, and binding generation.
+    - First-party plugins for popular bundlers (Webpack, Rollup, Vite) to automate Wasm compilation, optimization, and binding generation.
 
 ## Advanced Use Cases (Under Development)
 
@@ -59,14 +59,14 @@ Example my-module.wasm (Conceptual Source - e.g., from Rust):
 
 ```rust
 // my-module.rs
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub extern "C" fn add(a: i32, b: i32) -> i32 {
     a + b
 }
 
 // For simplicity, assume greet takes a pointer and length
 // and your Wasm module also exports a `memory` object
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub extern "C" fn greet(ptr: *mut u8, len: usize) {
     // ... Wasm logic to read the string from memory and print it ...
 }
@@ -161,12 +161,12 @@ When you run npx wasmforge generate <path/to/module.wasm>:
 2. Signature Extraction: For each exported function, it extracts its name, the number and types of its parameters (e.g., i32, f64), and its return type.
 3. Type Mapping: WasmForge maps these Wasm types to equivalent TypeScript types (e.g., i32 becomes number).
 4. Wrapper Generation:
-   - .d.ts: An interface is generated, providing type definitions for all identified exports.
-   - .js (or .ts): A runtime module is created. This module contains:
-     - A load() function that handles WebAssembly.instantiateStreaming (or instantiate) and injects a default importObject.
-     - Proxy functions or direct re-exports of the Wasm functions.
-     - Crucially, convenience wrappers like greetString are generated if WasmForge detects common patterns (e.g., a function taking (ptr: number, len: number) might suggest a string argument, prompting the generation of a string helper).
-     - Logic for basic memory management (writing/reading strings/arrays to/from Wasm memory) is included or leveraged from the WasmForge runtime.
+    - .d.ts: An interface is generated, providing type definitions for all identified exports.
+    - .js (or .ts): A runtime module is created. This module contains:
+        - A load() function that handles WebAssembly.instantiateStreaming (or instantiate) and injects a default importObject.
+        - Proxy functions or direct re-exports of the Wasm functions.
+        - Crucially, convenience wrappers like greetString are generated if WasmForge detects common patterns (e.g., a function taking (ptr: number, len: number) might suggest a string argument, prompting the generation of a string helper).
+        - Logic for basic memory management (writing/reading strings/arrays to/from Wasm memory) is included or leveraged from the WasmForge runtime.
 5. Optimization (Optional): If --optimize is used, WasmForge integrates with wasm-opt to pre-process the Wasm binary before generating bindings.
 
 ## 🤝 Contributing

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "WasmForge is a toolkit designed to dramatically simplify the WebAssembly (Wasm) development workflow, bringing a new level of type safety, developer experience, and ease of integration to your Wasm projects. Say goodbye to manual bindings and arcane memory management; with WasmForge, loading and interacting with Wasm feels just like using regular JavaScript modules.",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
@@ -38,6 +39,8 @@
   ],
   "homepage": "https://github.com/deondreE/WasmForge#readme",
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@rollup/plugin-typescript": "^12.1.4",
     "@types/fs-extra": "^11.0.4",
     "@types/jest": "^30.0.0",
     "@types/node": "^24.3.0",
